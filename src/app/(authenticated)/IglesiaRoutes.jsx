@@ -1,4 +1,4 @@
-import { IglesiaPage } from "../pages/IglesiaPage"
+import { IglesiaPage } from "./IglesiaPage"
 import {Route, Routes, Navigate} from 'react-router-dom'
 
 export const IglesiaRoutes = () => {

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { IglesiaApp } from './IglesiaApp'
 import './styles.css'
 import {BrowserRouter} from 'react-router-dom'
-import { store } from './store/store'
+import { store } from '../store/store'
 import { Provider } from 'react-redux'
 import './assets/globals.scss'
 

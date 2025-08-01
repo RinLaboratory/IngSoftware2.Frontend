@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom'
-import { LoginPage } from '../auth/pages'
+import { LoginPage } from './(auth)/LoginPage'
 import { useAuthStore } from '../hooks/usAuthStore'
-import { Documentos } from '../iglesia/pages/Documentos'
-import { Usuarios } from '../iglesia/pages/Usuarios'
-import { IglesiaPage } from "../iglesia/pages/IglesiaPage"
-import { ExportBaptism } from '../iglesia/pages/ExportBaptism'
-import { ExportConfirmacion } from '../iglesia/pages/ExportConfirmacion'
-import { ExportMatrimonio } from '../iglesia/pages/ExportMarriage'
+import { Documentos } from './(authenticated)/Documentos/page'
+import { Usuarios } from './(authenticated)/Usuarios/page'
+import { IglesiaPage } from "./(authenticated)/IglesiaPage"
+import { ExportBaptism } from './(authenticated)/ExportBaptism/page'
+import { ExportConfirmacion } from './(authenticated)/ExportConfirmacion/page'
+import { ExportMatrimonio } from './(authenticated)/ExportMarriage/page'
 
 
 export const AppRouter = () => {
