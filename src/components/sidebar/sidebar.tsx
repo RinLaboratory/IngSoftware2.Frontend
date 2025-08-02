@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, VStack, Link, Image, Flex } from "@chakra-ui/react";
-import Styles from "./sidebar-1.module.scss";
+import Styles from "./sidebar.module.scss";
 import { usePathname } from "next/navigation";
 
 export default function Sidebar() {

@@ -1,4 +1,4 @@
-import Sidebar from "~/components/sidebar-1/sidebar-1";
+import Sidebar from "~/components/sidebar/sidebar";
 import { verifySession } from "./actions";
 import { redirect } from "next/navigation";
 
