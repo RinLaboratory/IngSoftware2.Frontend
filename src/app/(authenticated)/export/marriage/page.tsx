@@ -1,3 +1,5 @@
+"use client";
+
 import { Box } from "@chakra-ui/react";
 import { PDFViewer } from "@react-pdf/renderer";
 import { useQuery } from "@tanstack/react-query";

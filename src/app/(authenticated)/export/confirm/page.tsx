@@ -1,3 +1,5 @@
+"use client";
+
 import { useMemo } from "react";
 import { Box } from "@chakra-ui/react";
 import { PDFViewer } from "@react-pdf/renderer";
