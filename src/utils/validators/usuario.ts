@@ -10,21 +10,19 @@ export const UserSchema = z.object({
   password_id: z.string(),
   rol: z.string(),
   phone: z.string(),
+  lastSeen: z.string().optional(),
 });
 
 export type TSafeUser = z.infer<typeof UserSchema>;
 
 export const InsertUserSchema = UserSchema.pick({
   name: true,
-  nameE: true,
   lastname: true,
-  lastnameE: true,
   email: true,
   rol: true,
   phone: true,
 }).extend({
   password: z.string().optional(),
-  confirmPassword: z.string().optional(),
 });
 
 export type TInsertUser = z.infer<typeof InsertUserSchema>;
