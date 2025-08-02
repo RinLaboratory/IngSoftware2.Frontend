@@ -12,7 +12,7 @@ export default function ExportBaptismPage() {
   const searchParams = useSearchParams();
   const queriedDocumentId = searchParams.get("documentId") ?? "";
 
-  const { data } = useQuery<{
+  const { data, isLoading: isLoadingDocument } = useQuery<{
     documents: TDocument[];
   }>({
     queryKey: [
@@ -39,9 +39,11 @@ export default function ExportBaptismPage() {
 
   return (
     <Box marginLeft="18vw" h="100vh" style={{ display: "block" }}>
-      <PDFViewer width="100%" height="100%">
-        <Paper document={document} adjacentDocuments={adjacentDocuments} />
-      </PDFViewer>
+      {!isLoadingDocument && (
+        <PDFViewer width="100%" height="100%">
+          <Paper document={document} adjacentDocuments={adjacentDocuments} />
+        </PDFViewer>
+      )}
     </Box>
   );
 }
