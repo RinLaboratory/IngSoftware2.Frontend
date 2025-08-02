@@ -1,6 +1,6 @@
 import React from "react";
-import Contents from "~/components/pages/index/contents";
+import Dashboard from "~/components/pages/dashboard";
 
 export default function IglesiaPage() {
-  return <Contents />;
+  return <Dashboard />;
 }
