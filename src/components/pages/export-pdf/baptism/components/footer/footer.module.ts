@@ -16,13 +16,14 @@ const styles = StyleSheet.create({
     padding: "15% 0 0 10%",
     alignItems: "center",
     letterSpacing: "1pt",
-    lineHeight: "2pt",
+    lineHeight: "2rem",
   },
   sello: {
     fontSize: "2vw",
     fontWeight: "800",
     padding: "5% 0 0 80%",
     alignItems: "center",
+    lineHeight: "1.5rem",
   },
 });
 export default styles;

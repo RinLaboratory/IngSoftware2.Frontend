@@ -4,6 +4,7 @@ import styles from "../body.module";
 import Footer from "../../footer/footer";
 import type { TDocument } from "~/utils/validators/documento";
 import type { TAdjacentDocuments } from "~/utils/validators/miscellaneous";
+import stringToDate from "~/utils/convert-string-to-date";
 
 interface BodyProps {
   document: TDocument;
@@ -14,18 +15,10 @@ export default function BodyWithData({
   document,
   adjacentDocuments,
 }: BodyProps) {
-  const bautizoDate = adjacentDocuments.Bautismo.b_date
-    .replace("?", "1")
-    .split("-");
-  const mesBautizo = new Date(
-    adjacentDocuments.Bautismo.b_date.replace("?", "1"),
+  const bautizoDate = stringToDate(adjacentDocuments.Bautismo.b_date);
+  const confirmacionDate = stringToDate(
+    adjacentDocuments.Confirmacion?.c_date ?? "",
   );
-  const confirmacionDate = adjacentDocuments.Confirmacion?.c_date
-    .replace("?", "1")
-    .split("-");
-  const mesConfirmacion = adjacentDocuments.Confirmacion
-    ? new Date(adjacentDocuments.Confirmacion.c_date.replace("?", "1"))
-    : "";
 
   return (
     <View>
@@ -68,25 +61,17 @@ export default function BodyWithData({
         <Text>
           y de ___________________________________________________________
         </Text>
-        {bautizoDate[0] === "" ? (
-          <></>
-        ) : (
-          <View style={{ flexDirection: "column", paddingBottom: "1%" }}>
-            <Text style={{ flex: 1, padding: "0 0 0 6%" }}>
-              {bautizoDate[2]} de{" "}
-              {new Intl.DateTimeFormat("es-ES", { month: "long" }).format(
-                mesBautizo,
-              )}{" "}
-              del año {bautizoDate[0]}
-            </Text>
-            <Text style={{ flex: 1, padding: "0 0 0 71%" }}>
-              {document.Tomo}{" "}
-            </Text>
-            <Text style={{ flex: 1, padding: "0 0 0 93%" }}>
-              {document.Pag}{" "}
-            </Text>
-          </View>
-        )}
+        <View style={{ flexDirection: "column", paddingBottom: "1%" }}>
+          <Text style={{ flex: 1, padding: "0 0 0 6%" }}>
+            {bautizoDate.toLocaleDateString("es-cl", { day: "numeric" })}de{" "}
+            {bautizoDate.toLocaleDateString("es-cl", { month: "long" })}del año
+            {bautizoDate.toLocaleDateString("es-cl", { year: "numeric" })}
+          </Text>
+          <Text style={{ flex: 1, padding: "0 0 0 71%" }}>
+            {document.Tomo}{" "}
+          </Text>
+          <Text style={{ flex: 1, padding: "0 0 0 93%" }}>{document.Pag} </Text>
+        </View>
         <Text>
           el _____________________________ Libro __________ Pág. __________
         </Text>
@@ -103,22 +88,18 @@ export default function BodyWithData({
         <Text>
           ha sido confirmado en (lugar) ___________________________________
         </Text>
-        {adjacentDocuments.Bautismo.b_date === "" ? (
+        {adjacentDocuments.Confirmacion?.c_date === "" ? (
           <></>
         ) : (
           <View style={{ flexDirection: "column", paddingBottom: "1%" }}>
             <Text style={{ flex: 1, padding: "0 0 0 18%" }}>
-              {mesConfirmacion &&
-                confirmacionDate?.[2] !== undefined &&
-                confirmacionDate[0] !== undefined && (
-                  <>
-                    {confirmacionDate[2]} de{" "}
-                    {new Intl.DateTimeFormat("es-ES", { month: "long" }).format(
-                      mesConfirmacion,
-                    )}{" "}
-                    del año {confirmacionDate[0]}
-                  </>
-                )}
+              {confirmacionDate.toLocaleDateString("es-cl", { day: "numeric" })}
+              de
+              {confirmacionDate.toLocaleDateString("es-cl", { month: "long" })}
+              del año
+              {confirmacionDate.toLocaleDateString("es-cl", {
+                year: "numeric",
+              })}
             </Text>
           </View>
         )}

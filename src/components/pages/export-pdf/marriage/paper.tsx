@@ -19,14 +19,20 @@ export default function Paper({ document, adjacentDocuments }: PaperProps) {
         <View style={{ flexDirection: "row", height: "1008px" }}>
           <View style={{ flexDirection: "column" }}>
             <Header />
-            {!document || !adjacentDocuments ? (
-              <BodyWithoutData />
-            ) : (
-              <BodyWithData
-                document={document}
-                adjacentDocuments={adjacentDocuments}
-              />
-            )}
+            <View
+              render={() => (
+                <>
+                  {!document || !adjacentDocuments ? (
+                    <BodyWithoutData />
+                  ) : (
+                    <BodyWithData
+                      document={document}
+                      adjacentDocuments={adjacentDocuments}
+                    />
+                  )}
+                </>
+              )}
+            />
           </View>
           <View
             style={{

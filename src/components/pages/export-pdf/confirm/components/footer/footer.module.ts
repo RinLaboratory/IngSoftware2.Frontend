@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     padding: "9% 0 0 15%",
     alignItems: "center",
     letterSpacing: "1pt",
-    lineHeight: "2pt",
+    lineHeight: "2rem",
   },
   sello: {
     fontSize: "2vw",

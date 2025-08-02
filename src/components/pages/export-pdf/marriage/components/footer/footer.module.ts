@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     fontSize: "1.5vw",
     padding: "15% 0 0 0",
     letterSpacing: ".8pt",
-    lineHeight: "2pt",
+    lineHeight: "2rem",
   },
   container2: {
     flexDirection: "column",
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     fontSize: "1.5vw",
     padding: "8% 0 0 0",
     letterSpacing: ".8pt",
-    lineHeight: "2pt",
+    lineHeight: "2rem",
   },
   sello: {
     margin: "2vw 0 0 33vw",
