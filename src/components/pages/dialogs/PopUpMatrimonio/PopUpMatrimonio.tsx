@@ -21,6 +21,7 @@ import {
   FormFieldMessage,
   FormItem,
 } from "~/components/ui/form/form";
+import { redirect } from "next/navigation";
 
 type TModalMode = "add" | "edit" | "view";
 
@@ -29,6 +30,7 @@ interface PopUpMatrimonioProps {
   isOpen: boolean;
   onClose: () => void;
   modalMode: TModalMode;
+  documentId?: string | undefined;
 }
 
 const options = [
@@ -48,7 +50,12 @@ export default function PopUpMatrimonio({
   onClose,
   modalMode,
   form,
+  documentId,
 }: PopUpMatrimonioProps) {
+  const openPDF = () => {
+    redirect(`/export/marriage?&documentId=${documentId ?? ""}`);
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="3xl">
       <ModalOverlay />
@@ -302,9 +309,14 @@ export default function PopUpMatrimonio({
         </ModalBody>
         <ModalFooter>
           {modalMode === "view" ? (
-            <Button colorScheme="green" mr={3} onClick={onClose}>
-              Aceptar
-            </Button>
+            <>
+              <Button colorScheme="yellow" mr={3} onClick={openPDF}>
+                Ver en PDF
+              </Button>
+              <Button colorScheme="green" mr={3} onClick={onClose}>
+                Aceptar
+              </Button>
+            </>
           ) : (
             <Button
               colorScheme="orange"

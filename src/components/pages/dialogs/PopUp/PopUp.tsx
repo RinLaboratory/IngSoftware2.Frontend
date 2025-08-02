@@ -83,7 +83,7 @@ export default function PopUp({
         await Swal.fire(
           "Añadido",
           "El documento ha sido agregado al sistema.",
-          "success",
+          "success"
         );
         toast({
           title: `Atención`,
@@ -144,7 +144,7 @@ export default function PopUp({
         await Swal.fire(
           "Editado",
           "El documento ha sido editado correctamente.",
-          "success",
+          "success"
         );
         if (refetchDocuments) {
           await refetchDocuments();
@@ -169,7 +169,7 @@ export default function PopUp({
   };
 
   const openPDF = () => {
-    redirect(`/ExportBaptism?&documentId=${document?._id ?? ""}`);
+    redirect(`/export/baptism?&documentId=${document?._id ?? ""}`);
   };
 
   useEffect(() => {
@@ -708,6 +708,7 @@ export default function PopUp({
           form={form}
           isOpen={activeDialog === "matrimonio"}
           onClose={() => setActiveDialog("persona")}
+          documentId={document?._id}
         />
       </FormProvider>
     </>
