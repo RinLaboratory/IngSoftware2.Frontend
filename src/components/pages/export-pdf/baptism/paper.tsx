@@ -4,8 +4,8 @@ import { Page, Document, View } from "@react-pdf/renderer";
 
 import Header from "./components/header/header";
 import type { TAdjacentDocuments, TDocument } from "~/utils/validators";
-import BodyWithoutData from "./components/body/without-data/body-without-data";
-import BodyWithData from "./components/body/with-data/body-with-data";
+import BodyWithoutData from "./components/body/without-data/body";
+import BodyWithData from "./components/body/with-data/body";
 
 interface PaperProps {
   document: TDocument | undefined;
@@ -17,16 +17,22 @@ export default function Paper({ document, adjacentDocuments }: PaperProps) {
     <Document>
       <Page size="LEGAL">
         <View style={{ flexDirection: "row", height: "1008px" }}>
-          <View style={{ flexDirection: "column" }}>
+          <View style={{ flexDirection: "column", height: "100%" }}>
             <Header />
-            {!document || !adjacentDocuments ? (
-              <BodyWithoutData />
-            ) : (
-              <BodyWithData
-                document={document}
-                adjacentDocuments={adjacentDocuments}
-              />
-            )}
+            <View
+              render={() => (
+                <>
+                  {!document || !adjacentDocuments ? (
+                    <BodyWithoutData />
+                  ) : (
+                    <BodyWithData
+                      document={document}
+                      adjacentDocuments={adjacentDocuments}
+                    />
+                  )}
+                </>
+              )}
+            />
           </View>
           <View
             style={{
