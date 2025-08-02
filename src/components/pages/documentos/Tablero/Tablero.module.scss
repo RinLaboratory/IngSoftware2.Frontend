@@ -1,0 +1,35 @@
+.UVregular {
+  font-family: "Raleway-regular";
+  border-color: #70acb5;
+  size: lg;
+  width: 74vw;
+  color-scheme: teal;
+}
+.UVbold {
+  font-family: "Raleway-bold";
+}
+.UVregular Box,
+.UVregular Th,
+.UVregular Td,
+.UVbold Td {
+  padding-bottom: 0.5vw;
+  font-size: 0.9vw;
+  text-align: center;
+}
+.borrar {
+  background-color: white;
+  padding: 0 0.3vw 0 0.3vw;
+  margin: 0 1vw 0 1vw;
+  display: flex;
+  justify-content: center;
+  border-radius: 15px;
+  border-color: #f90000;
+  border-width: 2px;
+}
+.ver {
+  background-color: #74cbac;
+  padding: 0 0.3vw 0 0.3vw;
+  display: flex;
+  justify-content: center;
+  border-radius: 15px;
+}
