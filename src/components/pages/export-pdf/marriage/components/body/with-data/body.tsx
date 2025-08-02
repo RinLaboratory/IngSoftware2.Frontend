@@ -3,6 +3,7 @@ import { Text, View } from "@react-pdf/renderer";
 import styles from "../body.module";
 import Footer from "../../footer/footer";
 import type { TAdjacentDocuments, TDocument } from "~/utils/validators";
+import stringToDate from "~/utils/convert-string-to-date";
 
 interface BodyProps {
   document: TDocument;
@@ -14,14 +15,8 @@ export default function BodyWithData({
   adjacentDocuments,
 }: BodyProps) {
   const currentDate = new Date();
-  const bautizoDate = adjacentDocuments.Bautismo.b_date
-    .replace("?", "1")
-    .split("-");
-  const cumpleDate = document.birth.replace("?", "1").split("-");
-  const mesBautizo = new Date(
-    adjacentDocuments.Bautismo.b_date.replace("?", "1"),
-  );
-  const mesCumple = new Date(document.birth.replace("?", "1"));
+  const bautizoDate = stringToDate(adjacentDocuments.Bautismo.b_date);
+  const cumpleDate = stringToDate(document.birth);
 
   return (
     <View>
@@ -30,10 +25,10 @@ export default function BodyWithData({
           <></>
         ) : (
           <View style={{ flexDirection: "column", paddingBottom: "1%" }}>
-            <Text style={{ flex: 1, padding: "0 0 0 52%" }}>
+            <Text style={{ flex: 1, padding: "0 0 0 43%" }}>
               {document.Tomo}{" "}
             </Text>
-            <Text style={{ flex: 1, padding: "0 0 0 80%" }}>
+            <Text style={{ flex: 1, padding: "0 0 0 65%" }}>
               {document.Pag}{" "}
             </Text>
           </View>
@@ -41,23 +36,17 @@ export default function BodyWithData({
         <Text>CERTIFICO que en el Libro N° ________ Página _________ de</Text>
         <Text>Bautismo se encuentra la siguiente partida:</Text>
         <Text>En la Parroquia SANTO TORIBIO DE MOGROVEJO, LAS CONDES</Text>
-        {bautizoDate[0] === "" ? (
-          <></>
-        ) : (
-          <View style={{ flexDirection: "column", paddingBottom: "1%" }}>
-            <Text style={{ flex: 1, padding: "0 0 0 6%" }}>
-              {bautizoDate[2]}
-            </Text>
-            <Text style={{ flex: 1, padding: "0 0 0 26%" }}>
-              {new Intl.DateTimeFormat("es-ES", { month: "long" }).format(
-                mesBautizo,
-              )}
-            </Text>
-            <Text style={{ flex: 1, padding: "0 0 0 62%" }}>
-              {bautizoDate[0]}
-            </Text>
-          </View>
-        )}
+        <View style={{ flexDirection: "column", paddingBottom: "1%" }}>
+          <Text style={{ flex: 1, padding: "0 0 0 6%" }}>
+            {bautizoDate.toLocaleDateString("es-cl", { day: "numeric" })}
+          </Text>
+          <Text style={{ flex: 1, padding: "0 0 0 26%" }}>
+            {bautizoDate.toLocaleDateString("es-cl", { month: "long" })}
+          </Text>
+          <Text style={{ flex: 1, padding: "0 0 0 55%" }}>
+            {bautizoDate.toLocaleDateString("es-cl", { year: "numeric" })}
+          </Text>
+        </View>
         <Text>a ________ de ______________ del año _________ se bautizó</Text>
         <View style={{ flexDirection: "column", paddingBottom: "1%" }}>
           <Text style={{ flex: 1, padding: "0 0 1% 6%" }}>
@@ -77,19 +66,16 @@ export default function BodyWithData({
           </View>
         )}
         <Text>RUT.:__________________________</Text>
-        {cumpleDate[0] === "" ? (
-          <></>
-        ) : (
-          <View style={{ flexDirection: "column", paddingBottom: "1%" }}>
-            <Text style={{ flex: 1, padding: "0 0 0 20%" }}>
-              {cumpleDate[2]} de{" "}
-              {new Intl.DateTimeFormat("es-ES", { month: "long" }).format(
-                mesCumple,
-              )}{" "}
-              del año {cumpleDate[0]}, {document.birthplace}
-            </Text>
-          </View>
-        )}
+        <View style={{ flexDirection: "column", paddingBottom: "1%" }}>
+          <Text style={{ flex: 1, padding: "0 0 0 20%" }}>
+            {cumpleDate.toLocaleDateString("es-cl", { day: "numeric" })}
+            &nbsp;de&nbsp;
+            {cumpleDate.toLocaleDateString("es-cl", { month: "long" })}&nbsp;del
+            año&nbsp;
+            {cumpleDate.toLocaleDateString("es-cl", { year: "numeric" })},&nbsp;
+            {document.birthplace}
+          </Text>
+        </View>
         <Text>
           nacido/a el ____________________________________________________
         </Text>
@@ -159,7 +145,7 @@ export default function BodyWithData({
               currentDate,
             )}
           </Text>
-          <Text style={{ flex: 1, padding: "0 0 0 80%" }}>
+          <Text style={{ flex: 1, padding: "0 0 0 65%" }}>
             {currentDate.getFullYear() - 2000}
           </Text>
         </View>
