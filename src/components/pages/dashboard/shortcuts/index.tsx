@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  Box,
-  VStack,
-  Image,
-  Link,
-  HStack,
-  Button,
-  Table,
-} from "@chakra-ui/react";
+import { Box, VStack, Image, Link, Button, Flex } from "@chakra-ui/react";
 import Styles from "./shortcuts.module.scss";
 import { FaFacebook } from "react-icons/fa";
 import { useState } from "react";
@@ -39,53 +31,47 @@ export default function Shortcuts() {
           <Box className={Styles.boton_imagenes}>
             <Image
               src="/images/unused_black.png"
-              w="1.8vw"
+              w="1.8rem"
               margin=".4vw 0 0 .89vw"
             />
           </Box>
-          <Box className={Styles.boton_texto}>
-            <Table className={Styles.UVregular}>
-              <HStack alignItems="start" marginLeft="1vw">
-                <HStack alignItems="start" marginLeft="1vw" spacing="2%">
-                  <VStack alignItems="start" marginLeft="1vw" spacing="2%">
-                    <Box flexDir="row" alignItems="center">
-                      <Link
-                        href="https://web.facebook.com/Parroquia-Santo-Toribio-de-Las-Condes-474555292658302/"
-                        isExternal
-                        padding="vw"
-                      >
-                        <Button
-                          colorScheme="blue"
-                          leftIcon={<FaFacebook />}
-                          w="8vw"
-                        >
-                          Facebook
-                        </Button>
-                      </Link>
-                    </Box>
-                  </VStack>
-                </HStack>
-                <HStack alignItems="start" marginLeft="1vw" spacing="2%">
-                  <VStack alignItems="start" marginLeft="1vw" spacing="2%">
-                    <Box flexDir="row" alignItems="center">
-                      <Link
-                        href="https://www.youtube.com/channel/UCro3erV_F9i_WBwLpKvV4EA"
-                        isExternal
-                        padding="vw"
-                      >
-                        <Button
-                          colorScheme="red"
-                          leftIcon={<FaFacebook />}
-                          w="8vw"
-                        >
-                          YouTube
-                        </Button>
-                      </Link>
-                    </Box>
-                  </VStack>
-                </HStack>
-              </HStack>
-            </Table>
+          <Box
+            className={Styles.boton_texto}
+            display="flex"
+            flexDir="row"
+            alignItems="center"
+            ml="5rem"
+          >
+            <Flex
+              flexDir="row"
+              gap="4"
+              w="full"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Box flexDir="row" alignItems="center">
+                <Link
+                  href="https://web.facebook.com/Parroquia-Santo-Toribio-de-Las-Condes-474555292658302/"
+                  isExternal
+                  padding="vw"
+                >
+                  <Button colorScheme="blue" leftIcon={<FaFacebook />} w="8vw">
+                    Facebook
+                  </Button>
+                </Link>
+              </Box>
+              <Box flexDir="row" alignItems="center">
+                <Link
+                  href="https://www.youtube.com/channel/UCro3erV_F9i_WBwLpKvV4EA"
+                  isExternal
+                  padding="vw"
+                >
+                  <Button colorScheme="red" leftIcon={<FaFacebook />} w="8vw">
+                    YouTube
+                  </Button>
+                </Link>
+              </Box>
+            </Flex>
           </Box>
         </Box>
 

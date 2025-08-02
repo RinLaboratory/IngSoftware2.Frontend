@@ -28,7 +28,11 @@ export default function Users() {
     ordenar: "",
   });
 
-  const { data: usersData, refetch } = useQuery<{
+  const {
+    data: usersData,
+    isLoading: isLoadingUsersData,
+    refetch,
+  } = useQuery<{
     users: TSafeUser[];
   }>({
     queryKey: [`/getusers?&search=${query.search}&buscar=${query.buscar}`],
@@ -56,6 +60,7 @@ export default function Users() {
             activeDialog={activeDialog}
             setActiveDialog={setActiveDialog}
             refetchUsers={refetch}
+            isLoadingUsersData={isLoadingUsersData}
           />
           <UsersTable
             activeDialog={activeDialog}
