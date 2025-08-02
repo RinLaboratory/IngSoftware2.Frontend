@@ -1,6 +1,6 @@
 import { Text, View } from "@react-pdf/renderer";
 
-import styles from "./footer.module.js";
+import styles from "./footer.module";
 
 export default function Footer() {
   return (
