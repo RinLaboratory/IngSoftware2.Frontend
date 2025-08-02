@@ -38,11 +38,7 @@ export default function ExportBaptismPage() {
   });
 
   return (
-    <Box
-      marginLeft="18vw"
-      h="100vh"
-      style={{ display: document ? "block" : "none" }}
-    >
+    <Box marginLeft="18vw" h="100vh" style={{ display: "block" }}>
       <PDFViewer width="100%" height="100%">
         <Paper document={document} adjacentDocuments={adjacentDocuments} />
       </PDFViewer>
