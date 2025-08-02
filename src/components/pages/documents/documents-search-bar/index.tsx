@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, HStack, Input, Stack, VStack, Image } from "@chakra-ui/react";
 import Styles from "./documents-search-bar.module.scss";
 import type { SingleValue } from "react-select";
@@ -27,11 +29,13 @@ const options2 = [
 interface DocumentsSearchBarProps {
   query: QueryDocuments;
   setQuery: React.Dispatch<React.SetStateAction<QueryDocuments>>;
+  isLoadingDocuments: boolean;
 }
 
 export default function DocumentsSearchBar({
   query,
   setQuery,
+  isLoadingDocuments,
 }: DocumentsSearchBarProps) {
   const [activeDialog, setActiveDialog] = useState<TActiveDialog>("none");
 
@@ -76,26 +80,36 @@ export default function DocumentsSearchBar({
           <Box w="7vw">Buscar Por:</Box>
           <HStack w="23vw">
             <Box w="10vw">
-              <Select
-                value={undefined}
-                className={Styles.Select}
-                onChange={handleSelectValue("search")}
-                options={options2}
-              />
+              {!isLoadingDocuments ? (
+                <Select
+                  value={options2.find(
+                    ({ value }) => value === query.selectValue,
+                  )}
+                  className={Styles.Select}
+                  onChange={handleSelectValue("search")}
+                  options={options2}
+                />
+              ) : (
+                <Input
+                  backgroundColor="white"
+                  readOnly
+                  placeholder="Cargando..."
+                />
+              )}
             </Box>
             {query.selectValue !== "FECHAINSCRIPCION" ? (
               <Input
                 w="13vw"
                 className="form-control mb-2"
                 placeholder="Ingresa el texto aquí..."
-                backgroundColor={"white"}
+                backgroundColor="white"
                 value={query.search}
                 onChange={handleInputChange}
               />
             ) : (
               <Input
                 w="13vw"
-                backgroundColor={"white"}
+                backgroundColor="white"
                 placeholder="Select Date and Time"
                 type="date"
                 size="md"
@@ -149,12 +163,20 @@ export default function DocumentsSearchBar({
         <VStack alignItems="start" marginLeft="1vw">
           <Box>Ordenar por</Box>
           <Box w="10vw">
-            <Select
-              value={undefined}
-              className={Styles.Select}
-              onChange={handleSelectValue("orderBy")}
-              options={options}
-            />
+            {!isLoadingDocuments ? (
+              <Select
+                value={options.find(({ value }) => value === query.selectValue)}
+                className={Styles.Select}
+                onChange={handleSelectValue("orderBy")}
+                options={options}
+              />
+            ) : (
+              <Input
+                backgroundColor="white"
+                readOnly
+                placeholder="Cargando..."
+              />
+            )}
           </Box>
         </VStack>
         <Box padding="1vw 0 0 1vw">

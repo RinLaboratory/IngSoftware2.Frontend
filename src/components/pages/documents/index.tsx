@@ -18,7 +18,11 @@ export default function Documents() {
     matrimonio: false,
   });
 
-  const { data, refetch } = useQuery<{
+  const {
+    data,
+    isLoading: isLoadingDocuments,
+    refetch,
+  } = useQuery<{
     documents: TDocument[];
   }>({
     queryKey: [
@@ -48,7 +52,11 @@ export default function Documents() {
         w="78vw"
         borderRadius="15px"
       >
-        <DocumentsSearchBar query={query} setQuery={setQuery} />
+        <DocumentsSearchBar
+          query={query}
+          setQuery={setQuery}
+          isLoadingDocuments={isLoadingDocuments}
+        />
         <DocumentsTable documents={filteredDocuments} refetch={refetch} />
       </Box>
     </Box>

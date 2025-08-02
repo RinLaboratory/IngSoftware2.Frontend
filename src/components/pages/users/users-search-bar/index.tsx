@@ -20,6 +20,7 @@ interface UsersSearchBarProps {
   activeDialog: "none" | "add-user" | "view-user";
   setActiveDialog: Dispatch<SetStateAction<"none" | "add-user" | "view-user">>;
   refetchUsers: () => Promise<QueryObserverResult<unknown, Error>>;
+  isLoadingUsersData: boolean;
 }
 
 export default function UsersSearchBar({
@@ -28,6 +29,7 @@ export default function UsersSearchBar({
   activeDialog,
   setActiveDialog,
   refetchUsers,
+  isLoadingUsersData,
 }: UsersSearchBarProps) {
   // guardamos los valores del input
   const handleInputText = (event: ChangeEvent<HTMLInputElement>) => {
@@ -62,11 +64,24 @@ export default function UsersSearchBar({
           <Box paddingLeft="1.2vw">Buscar por:</Box>
           <HStack>
             <Box>
-              <Select
-                className={Styles.select}
-                options={options}
-                onChange={handleSelectValue("search")}
-              />
+              {!isLoadingUsersData ? (
+                <Select
+                  value={options.find(({ value }) => value === query.search)}
+                  className={Styles.select}
+                  options={options}
+                  onChange={handleSelectValue("search")}
+                />
+              ) : (
+                <Input
+                  h="38px"
+                  w="192px"
+                  ml="5"
+                  className={Styles.select}
+                  backgroundColor="white"
+                  readOnly
+                  placeholder="Cargando..."
+                />
+              )}
             </Box>
             <Box paddingLeft="1vw">
               <Input
@@ -85,12 +100,25 @@ export default function UsersSearchBar({
         <HStack>
           <VStack alignItems="start">
             <Box paddingLeft="1.2vw">Ordenar por:</Box>
-            <Box paddingRight="2vw">
-              <Select
-                className={Styles.select}
-                options={options}
-                onChange={handleSelectValue("orderBy")}
-              />
+            <Box paddingRight="2rem">
+              {!isLoadingUsersData ? (
+                <Select
+                  value={options.find(({ value }) => value === query.ordenar)}
+                  className={Styles.select}
+                  options={options}
+                  onChange={handleSelectValue("orderBy")}
+                />
+              ) : (
+                <Input
+                  h="38px"
+                  w="192px"
+                  ml="5"
+                  className={Styles.select}
+                  backgroundColor="white"
+                  readOnly
+                  placeholder="Cargando..."
+                />
+              )}
             </Box>
           </VStack>
           <Box paddingTop="1.5vw">
