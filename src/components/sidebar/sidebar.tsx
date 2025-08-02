@@ -17,13 +17,13 @@ export default function Sidebar() {
     {
       name: "Documentos",
       icon: "/images/docs_black.png",
-      ref: "/Documentos",
+      ref: "/documents",
       class: Styles.topics,
     },
     {
       name: "Usuarios",
       icon: "/images/users_black.png",
-      ref: "/Usuarios",
+      ref: "/users",
       class: Styles.topics,
     },
   ];
