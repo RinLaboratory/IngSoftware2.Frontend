@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     fontSize: "2.4vw",
     padding: "5% 0 0 10%",
     letterSpacing: "1pt",
-    lineHeight: "2.3pt",
+    lineHeight: "2.3rem",
   },
 });
 export default styles;
