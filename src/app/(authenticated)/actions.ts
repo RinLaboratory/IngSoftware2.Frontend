@@ -4,6 +4,7 @@ import { verify } from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { env } from "~/env/shared";
 import * as http from "~/utils/http";
+import type { TSafeUser } from "~/utils/validators";
 
 export async function getAccountInfo(): Promise<unknown> {
   const cookieStore = await cookies();
@@ -13,8 +14,7 @@ export async function getAccountInfo(): Promise<unknown> {
   if (!isTokenAvailable) return;
 
   try {
-    throw new Error("not implemented");
-    const userData = await http.get<undefined>(`/users/current`);
+    const userData = await http.get<TSafeUser | undefined>(`/users/current`);
     return userData;
   } catch {
     return undefined;

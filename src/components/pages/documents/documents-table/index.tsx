@@ -23,7 +23,7 @@ import {
 import type { TDocument } from "~/utils/validators";
 import { useQuery } from "@tanstack/react-query";
 import type { QueryObserverResult } from "@tanstack/react-query";
-import PopUp from "../../sacrament-dialogs/person-dialog";
+import PersonDialog from "../../sacrament-dialogs/person-dialog";
 import type { TActiveDialog } from "../../sacrament-dialogs/constants";
 
 const tableHeaders = [
@@ -52,7 +52,7 @@ export default function DocumentsTable({
   const { data: adjacentDocuments, refetch: refetchAdjacentDocuments } =
     useQuery<TAdjacentDocuments>({
       queryKey: [
-        `/getadjacentdocuments?&b_id=${selectedDocument?.Bautismo.b_id ?? ""}&c_id=${selectedDocument?.Confirmacion.c_id ?? ""}&m_id=${selectedDocument?.Matrimonio.m_id ?? ""}&p_id=${selectedDocument?.parent_Data.p_id ?? ""}`,
+        `/documents/adjacent?&b_id=${selectedDocument?.Bautismo.b_id ?? ""}&c_id=${selectedDocument?.Confirmacion.c_id ?? ""}&m_id=${selectedDocument?.Matrimonio.m_id ?? ""}&p_id=${selectedDocument?.parent_Data.p_id ?? ""}`,
       ],
       staleTime: 1000,
       refetchOnMount: true,
@@ -72,11 +72,10 @@ export default function DocumentsTable({
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const data = await http.post<{ status: boolean }>(
-            "/deletedocument",
-            value,
-          );
-          if (data.status) {
+          const response = await http.del<
+            { status: true } | { status: false; error: string }
+          >(`/documents/${value._id}`, value);
+          if (response.status) {
             await Swal.fire(
               "Borrado",
               "El documento ha sido eliminado del sistema.",
@@ -241,7 +240,7 @@ export default function DocumentsTable({
         )}
       </Box>
       {selectedDocument && adjacentDocuments && activeDialog !== "none" && (
-        <PopUp
+        <PersonDialog
           activeDialog={activeDialog}
           setActiveDialog={setActiveDialog}
           modalMode="view"

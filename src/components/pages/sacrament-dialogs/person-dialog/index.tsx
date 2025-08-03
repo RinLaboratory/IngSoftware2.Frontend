@@ -75,10 +75,10 @@ export default function PersonDialog({
 
   const handleDocumentSubmit = async (values: TParsedDocument) => {
     if (modalMode === "add") {
-      const peticion = await http.post<
-        { status: true } | { status: false; msg: string }
-      >("/adddocument", values);
-      if (peticion.status == true) {
+      const response = await http.post<
+        { status: true } | { status: false; error: string }
+      >("/documents", values);
+      if (response.status === true) {
         setActiveDialog("none");
         await Swal.fire(
           "Añadido",
@@ -95,13 +95,13 @@ export default function PersonDialog({
         });
       } else {
         let mensaje = "";
-        if (peticion.msg == "document already exists") {
+        if (response.error === "document already exists") {
           mensaje = "El documento ya está registrado en el sistema.";
         }
-        if (peticion.msg == "name and lastname cant be blank") {
+        if (response.error === "name and lastname cant be blank") {
           mensaje = "El Nombre y el Apellido no pueden estar en blanco.";
         }
-        if (peticion.msg == "no perms") {
+        if (response.error === "no perms") {
           mensaje = "No tienes permisos suficientes para esto.";
         }
         toast({
@@ -136,10 +136,10 @@ export default function PersonDialog({
           ...values.Matrimonio,
         },
       };
-      const peticion = await http.put<
-        { status: true } | { status: false; msg: string }
-      >("/editdocument", constructedData);
-      if (peticion.status == true) {
+      const response = await http.put<
+        { status: true } | { status: false; error: string }
+      >("/documents", constructedData);
+      if (response.status == true) {
         setActiveDialog("none");
         await Swal.fire(
           "Editado",
@@ -151,10 +151,10 @@ export default function PersonDialog({
         }
       } else {
         let mensaje = "";
-        if (peticion.msg == "name and lastname cant be blank") {
+        if (response.error == "name and lastname cant be blank") {
           mensaje = "El Nombre y el Apellido no pueden estar en blanco.";
         }
-        if (peticion.msg == "no perms") {
+        if (response.error == "no perms") {
           mensaje = "No tienes permisos suficientes para esto.";
         }
         toast({

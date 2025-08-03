@@ -47,10 +47,9 @@ export default function UsersTable({
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await http.del<{ status: boolean }>(
-            "/deleteuser",
-            value,
-          );
+          const response = await http.del<
+            { status: true } | { status: false; error: string }
+          >(`/users/${value._id}`);
           if (response.status) {
             await Swal.fire(
               "Borrado",

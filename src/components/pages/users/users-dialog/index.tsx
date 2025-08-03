@@ -121,7 +121,7 @@ export default function UsersDialog({
       };
       const peticion = await http.put<
         { status: true } | { status: false; msg: string }
-      >("/edituser", constructedData);
+      >("/users", constructedData);
       if (peticion.status == true) {
         onClose();
         await Swal.fire(
