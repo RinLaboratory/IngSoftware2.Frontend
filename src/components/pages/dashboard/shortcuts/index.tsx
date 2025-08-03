@@ -4,7 +4,7 @@ import { Box, VStack, Image, Link, Button, Flex } from "@chakra-ui/react";
 import Styles from "./shortcuts.module.scss";
 import { FaFacebook } from "react-icons/fa";
 import { useState } from "react";
-import PopUp from "../../sacrament-dialogs/person-dialog";
+import PersonDialog from "../../sacrament-dialogs/person-dialog";
 import type { TActiveDialog } from "../../sacrament-dialogs/constants";
 
 export default function Shortcuts() {
@@ -112,7 +112,7 @@ export default function Shortcuts() {
           </Box>
         </Link>
       </VStack>
-      <PopUp
+      <PersonDialog
         activeDialog={activeDialog}
         setActiveDialog={setActiveDialog}
         modalMode="add"
