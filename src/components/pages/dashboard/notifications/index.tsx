@@ -12,7 +12,7 @@ export default function Notifications() {
     usuarios: number;
     permisos: number;
   }>({
-    queryKey: [`/getnotifications`],
+    queryKey: [`/notifications`],
     staleTime: 1000,
     refetchOnMount: true,
     refetchOnWindowFocus: true,

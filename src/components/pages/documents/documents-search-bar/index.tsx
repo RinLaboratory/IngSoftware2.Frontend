@@ -11,7 +11,7 @@ import { useState } from "react";
 import React from "react";
 import type { OrderBy, QueryDocuments, SelectValue } from "~/utils/validators";
 import type { TActiveDialog } from "../../sacrament-dialogs/constants";
-import PopUp from "../../sacrament-dialogs/person-dialog";
+import PersonDialog from "../../sacrament-dialogs/person-dialog";
 
 const options = [
   { value: "NOMBRE", label: "Nombre" },
@@ -83,7 +83,7 @@ export default function DocumentsSearchBar({
               {!isLoadingDocuments ? (
                 <Select
                   value={options2.find(
-                    ({ value }) => value === query.selectValue,
+                    ({ value }) => value === query.selectValue
                   )}
                   className={Styles.Select}
                   onChange={handleSelectValue("search")}
@@ -140,7 +140,7 @@ export default function DocumentsSearchBar({
                 w="1vw"
                 onClick={handleButtonOnPress(
                   "confirmacion",
-                  !query.confirmacion,
+                  !query.confirmacion
                 )}
               >
                 {query.confirmacion ? <CheckIcon color="black" /> : <></>}
@@ -188,7 +188,7 @@ export default function DocumentsSearchBar({
           </Box>
         </Box>
       </HStack>
-      <PopUp
+      <PersonDialog
         activeDialog={activeDialog}
         setActiveDialog={setActiveDialog}
         modalMode="add"

@@ -29,25 +29,23 @@ export default function Users() {
   });
 
   const {
-    data: usersData,
+    data: users,
     isLoading: isLoadingUsersData,
     refetch,
-  } = useQuery<{
-    users: TSafeUser[];
-  }>({
-    queryKey: [`/getusers?&search=${query.search}&buscar=${query.buscar}`],
+  } = useQuery<TSafeUser[]>({
+    queryKey: [`/users?&search=${query.search}&buscar=${query.buscar}`],
     staleTime: 1000,
     refetchOnMount: true,
     refetchOnWindowFocus: true,
   });
 
   const filteredUsers = useMemo(() => {
-    const _users = usersData?.users ?? [];
+    const _users = users ?? [];
 
     const _filteredUsers = applyOrderBy(_users, query);
 
     return _filteredUsers;
-  }, [query, usersData]);
+  }, [query, users]);
 
   return (
     <Box marginLeft="20vw" paddingTop="1.5vw">

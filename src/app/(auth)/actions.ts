@@ -11,7 +11,7 @@ export default async function login({
   email: string;
   password: string;
 }) {
-  const response = await http.post<{ token: string }>(`/auth`, {
+  const response = await http.post<{ token: string }>(`/auth/login`, {
     email,
     password,
   });

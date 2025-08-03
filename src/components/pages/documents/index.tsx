@@ -19,14 +19,12 @@ export default function Documents() {
   });
 
   const {
-    data,
+    data: documents,
     isLoading: isLoadingDocuments,
     refetch,
-  } = useQuery<{
-    documents: TDocument[];
-  }>({
+  } = useQuery<TDocument[]>({
     queryKey: [
-      `/getdocument?&search=${query.search}&selectValue=${query.selectValue}`,
+      `/documents?&search=${query.search}&selectValue=${query.selectValue}`,
     ],
     staleTime: 1000,
     refetchOnMount: true,
@@ -34,7 +32,7 @@ export default function Documents() {
   });
 
   const filteredDocuments = useMemo(() => {
-    const _documents = data?.documents ?? [];
+    const _documents = documents ?? [];
 
     const _filteredDocuments = filterDocumentsBySacrament(
       applyOrderBy(_documents, query.orderBy),
@@ -42,7 +40,7 @@ export default function Documents() {
     );
 
     return _filteredDocuments;
-  }, [query, data]);
+  }, [query, documents]);
 
   return (
     <Box marginLeft="20vw" paddingTop="1.5vw">
