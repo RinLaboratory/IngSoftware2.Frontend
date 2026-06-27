@@ -8,7 +8,7 @@ import nextPlugin from "@next/eslint-plugin-next";
 /** @type {import('typescript-eslint').Config} */
 export default [
   {
-    ignores: [".next/**", "dist/**"],
+    ignores: [".next/**", "dist/**", "next-env.d.ts"],
   },
   {
     files: ["**/*.js", "**/*.ts", "**/*.tsx"],
